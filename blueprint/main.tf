@@ -9,7 +9,6 @@ terraform {
 }
 
 provider "genesyscloud" {
-  features {}
 }
 
 
