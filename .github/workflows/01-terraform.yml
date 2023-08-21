@@ -9,9 +9,9 @@ jobs:
     with:
       path: blueprint
       gh_environment: dev
-      GENESYSCLOUD_API_REGION: https://api.euw2.pure.cloud
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
       GENESYSCLOUD_REGION: "eu-west-2"
-      GENESYSCLOUD_ARCHY_REGION: euw2.pure.cloud
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
@@ -22,9 +22,9 @@ jobs:
     with:
       path: blueprint
       gh_environment: dev
-      GENESYSCLOUD_API_REGION: https://api.euw2.pure.cloud
-      GENESYSCLOUD_REGION: eu-west-2
-      GENESYSCLOUD_ARCHY_REGION: euw2.pure.cloud
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
+      GENESYSCLOUD_REGION: "eu-west-2"
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
@@ -35,9 +35,9 @@ jobs:
     with:
       path: blueprint
       gh_environment: prod
-      GENESYSCLOUD_API_REGION: https://api.euw2.pure.cloud
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
       GENESYSCLOUD_REGION: "eu-west-2"
-      GENESYSCLOUD_ARCHY_REGION: euw2.pure.cloud
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
@@ -48,9 +48,9 @@ jobs:
     with:
       path: blueprint
       gh_environment: prod
-      GENESYSCLOUD_API_REGION: https://api.euw2.pure.cloud
-      GENESYSCLOUD_REGION: eu-west-2
-      GENESYSCLOUD_ARCHY_REGION: euw2.pure.cloud
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
+      GENESYSCLOUD_REGION: "eu-west-2"
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
