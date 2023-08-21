@@ -10,13 +10,6 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     env:
-      if: github.ref == 'refs/heads/master'
-      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
-      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
-      GENESYSCLOUD_REGION: "eu-west-2"
-      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
-      if: github.ref == 'refs/heads/develop'
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
       GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
