@@ -23,7 +23,7 @@ jobs:
       GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
       GENESYSCLOUD_REGION: "eu-west-2"
       GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
-      path: genesys_objects
+      path: blueprint
       gh_environment: dev
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
@@ -36,7 +36,7 @@ jobs:
       GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
       GENESYSCLOUD_REGION: "eu-west-2"
       GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
-      path: genesys_objects
+      path: blueprint
       gh_environment: prod
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
@@ -49,7 +49,7 @@ jobs:
       GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
       GENESYSCLOUD_REGION: "eu-west-2"
       GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
-      path: genesys_objects
+      path: blueprint
       gh_environment: prod
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
