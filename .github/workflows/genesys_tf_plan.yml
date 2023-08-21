@@ -59,6 +59,7 @@ jobs:
           terraform_version: ${{ inputs.tf_version }}
 
       - name: Terraform Init
+        working-directory: ./blueprint
         run: |
             export oauthclient_id=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_ID }}
             export oauthclient_secret=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
@@ -67,7 +68,7 @@ jobs:
             terraform init
 
       - name: Terraform Plan
-        id: plan
+        working-directory: ./blueprint
         run: |
             export oauthclient_id=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_ID }}
             export oauthclient_secret=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
@@ -77,5 +78,6 @@ jobs:
         continue-on-error: true
 
       - name: Terraform Plan Status
+        working-directory: ./blueprint
         if: steps.plan.outcome == 'failure'
         run: exit 1
