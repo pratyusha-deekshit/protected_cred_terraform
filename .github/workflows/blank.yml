@@ -6,9 +6,9 @@ permissions:
   contents: read
 
 jobs:
-  terraform dev:
+  terraformDev:
     if: github.ref == 'refs/heads/develop'
-    name: 'Terraform'
+    name: 'Terraform_Dev'
     runs-on: ubuntu-latest
     env:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
@@ -62,9 +62,9 @@ jobs:
         architect-flow-path: $GITHUB_WORKSPACE/blueprint/genesys-cloud-architect-flows/TestPD628.yaml
         architect-results-path: $GITHUB_WORKSPACE/output/results.json
     #end
-  terraform prod:
+  terraformProd:
     if: github.ref == 'refs/heads/master'
-    name: 'Terraform'
+    name: 'Terraform_Prod'
     runs-on: ubuntu-latest
     env:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
