@@ -19,19 +19,19 @@ on:
         default: null
       GENESYSCLOUD_API_REGION:
         description: 'Specifies the Genesys API region.'
-        required: true
+        required: false
         type: string
-        default: null
+        default: https://api.euw2.pure.cloud
       GENESYSCLOUD_REGION:
         description: 'Specifies the Genesys region.'
-        required: true
+        required: false
         type: string
-        default: null
+        default: eu-west-2
       GENESYSCLOUD_ARCHY_REGION:
         description: 'Specifies the Genesys archy region.'
-        required: true
+        required: false
         type: string
-        default: null
+        default: euw2.pure.cloud
     secrets:
       GENESYSCLOUD_OAUTHCLIENT_ID:
         description: 'cli config credentials ID'
