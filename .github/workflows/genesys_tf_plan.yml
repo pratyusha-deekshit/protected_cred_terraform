@@ -73,6 +73,7 @@ jobs:
             export oauthclient_secret=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
             export aws_region=${{ inputs.GENESYSCLOUD_REGION }} 
             terraform plan
+        continue-on-error: true
 
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
