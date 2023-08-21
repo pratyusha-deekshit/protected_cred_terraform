@@ -12,6 +12,6 @@ runs:
   steps:
     - run: |
         export PATH=$PATH:$GITHUB_WORKSPACE/archy
-        archy publish --forceUnlock --file ${{inputs.architect-flow-path}} --clientId ${{ inputs.GENESYSCLOUD_OAUTHCLIENT_ID }} --clientSecret ${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }} --location euw2.pure.cloud --overwriteResultsFile --resultsFile ${{inputs.architect-results-path}}
+        archy publish --forceUnlock --file ${{inputs.architect-flow-path}} --clientId ${{ inputs.GENESYSCLOUD_OAUTHCLIENT_ID }} --clientSecret ${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }} --location 'euw2.pure.cloud' --overwriteResultsFile --resultsFile ${{inputs.architect-results-path}}
         cat ${{inputs.architect-results-path}}
       shell: bash
