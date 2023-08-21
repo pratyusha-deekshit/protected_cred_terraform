@@ -9,6 +9,7 @@ terraform {
 }
 
 provider "genesyscloud" {
+  aws_region = "eu-west-2"
 }
 
 
