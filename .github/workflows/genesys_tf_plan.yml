@@ -71,7 +71,8 @@ jobs:
         run: |
             export oauthclient_id=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_ID }}
             export oauthclient_secret=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
-            export aws_region=${{ inputs.GENESYSCLOUD_REGION }} 
+            export aws_region=${{ inputs.GENESYSCLOUD_REGION }}
+            
             terraform plan -input=false
         continue-on-error: true
 
