@@ -1,0 +1,88 @@
+### Reusable workflow to plan terraform deployment, create artifact and upload to workflow artifacts for consumption ###
+name: "genesys_tf_plan"
+on:
+  workflow_call:
+    inputs:
+      path:
+        description: 'Specifies the path of the root terraform module.'
+        required: true
+        type: string
+      tf_version:
+        description: 'Specifies version of Terraform to use. e.g: 1.1.0 Default=latest.'
+        required: false
+        type: string
+        default: latest
+      gh_environment:
+        description: 'Specifies the GitHub deployment environment.'
+        required: false
+        type: string
+        default: null
+      GENESYSCLOUD_API_REGION:
+        description: 'Specifies the Genesys API region.'
+        required: true
+        type: string
+        default: null
+      GENESYSCLOUD_REGION:
+        description: 'Specifies the Genesys region.'
+        required: true
+        type: string
+        default: null
+      GENESYSCLOUD_ARCHY_REGION:
+        description: 'Specifies the Genesys archy region.'
+        required: true
+        type: string
+        default: null
+    secrets:
+      GENESYSCLOUD_OAUTHCLIENT_ID:
+        description: 'cli config credentials ID'
+        required: true
+      GENESYSCLOUD_OAUTHCLIENT_SECRET:
+        description: 'cli config credentials Secret'
+        required: true
+
+jobs:
+  build-plan:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.gh_environment }}
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ inputs.path }}
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+        
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2.0.2
+        with:
+          terraform_version: ${{ inputs.tf_version }}
+
+      - name: Terraform Init
+        run: |
+            export oauthclient_id=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_ID }}
+            export oauthclient_secret=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
+            export aws_region=${{ inputs.GENESYSCLOUD_REGION }}
+
+            terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan
+        continue-on-error: true
+
+      - name: Terraform Plan Status
+        if: steps.plan.outcome == 'failure'
+        run: exit 1
+      - name: Terraform Apply
+        working-directory: ./blueprint
+        run: terraform apply -auto-approve -input=false
+      
+      - name: Install_archy
+        uses: ./.github/actions/genesys-cloud-dev-tools
+      - name: Push_archy_flow
+        uses: ./.github/actions/genesys-cloud-publish-archy-flow
+        with:
+          architect-flow-path: $GITHUB_WORKSPACE/blueprint/genesys-cloud-architect-flows/TestPD628.yaml
+          architect-results-path: $GITHUB_WORKSPACE/output/results.json
+      #end

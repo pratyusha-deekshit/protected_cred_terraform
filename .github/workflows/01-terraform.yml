@@ -1,0 +1,56 @@
+name: "01_Terraform"
+on:
+  workflow_dispatch:
+
+jobs:
+  Plan_Dev:
+    if: github.ref == 'refs/heads/develop'
+    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_plan.yml@develop
+    with:
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
+      GENESYSCLOUD_REGION: "eu-west-2"
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
+      path: blueprint
+      gh_environment: dev
+    secrets:
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
+
+  Deploy_Dev:
+    needs: Plan_Dev
+    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_apply.yml@develop
+    with:
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
+      GENESYSCLOUD_REGION: "eu-west-2"
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
+      path: genesys_objects
+      gh_environment: dev
+    secrets:
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
+
+  Plan_Prod:
+    if: github.ref == 'refs/heads/master'
+    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_plan.yml@master
+    with:
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
+      GENESYSCLOUD_REGION: "eu-west-2"
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
+      path: genesys_objects
+      gh_environment: prod
+    secrets:
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
+
+  Deploy_Prod:
+    needs: Plan_Prod
+    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_apply.yml@master
+    with:
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
+      GENESYSCLOUD_REGION: "eu-west-2"
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
+      path: genesys_objects
+      gh_environment: prod
+    secrets:
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
