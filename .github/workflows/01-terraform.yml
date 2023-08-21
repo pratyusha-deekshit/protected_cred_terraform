@@ -5,7 +5,7 @@ on:
 jobs:
   Plan_Dev:
     if: github.ref == 'refs/heads/develop'
-    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_plan.yml@develop
+    uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@develop
     with:
       path: blueprint
       gh_environment: dev
@@ -18,7 +18,7 @@ jobs:
 
   Deploy_Dev:
     needs: Plan_Dev
-    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_apply.yml@develop
+    uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_apply.yml@develop
     with:
       path: blueprint
       gh_environment: dev
@@ -31,7 +31,7 @@ jobs:
 
   Plan_Prod:
     if: github.ref == 'refs/heads/master'
-    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_plan.yml@master
+    uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@master
     with:
       path: blueprint
       gh_environment: prod
@@ -44,7 +44,7 @@ jobs:
 
   Deploy_Prod:
     needs: Plan_Prod
-    uses: pratyusha-deekshit/test_HIG/.github/workflows/genesys_tf_apply.yml@master
+    uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_apply.yml@master
     with:
       path: blueprint
       gh_environment: prod
