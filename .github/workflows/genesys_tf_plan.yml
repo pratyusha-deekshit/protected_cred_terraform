@@ -29,7 +29,6 @@ jobs:
     env:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.client_id }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.client_secret }}
-      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
       GENESYSCLOUD_REGION: "eu-west-2"
       GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
 
