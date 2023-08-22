@@ -1,5 +1,5 @@
 resource "genesyscloud_user" "sheldoncooper_agent" {
-  email           = "sheldon.cooper@neverrea44.demo.com"
+  email           = "sheldon.cooper@neverrea24.demo.com"
   name            = "Sheldon Cooper"
   password        = "b@Zinga1972"
   state           = "active"
