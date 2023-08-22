@@ -10,6 +10,7 @@ jobs:
     if: github.ref == 'refs/heads/develop'
     name: 'Terraform_Dev'
     runs-on: ubuntu-latest
+    environment: dev
     env:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
@@ -66,6 +67,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     name: 'Terraform_Prod'
     runs-on: ubuntu-latest
+    environment: prod
     env:
       GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
       GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
