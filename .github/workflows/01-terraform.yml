@@ -4,41 +4,37 @@ on:
 
 jobs:
   Plan_Dev:
-    environment: dev
     if: github.ref == 'refs/heads/develop'
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@develop
     with:
       gh_environment: dev
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
+      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
 
   Deploy_Dev:
-    environment: dev
     needs: Plan_Dev
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_apply.yml@develop
     with:
       gh_environment: dev
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
+      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
 
   Plan_Prod:
-    environment: prod
     if: github.ref == 'refs/heads/master'
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@master
     with:
       gh_environment: prod
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
+      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
 
   Deploy_Prod:
-    environment: prod
     needs: Plan_Prod
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_apply.yml@master
     with:
       gh_environment: prod
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
+      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
