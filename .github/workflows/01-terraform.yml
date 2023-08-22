@@ -25,7 +25,7 @@ jobs:
     if: github.ref == 'refs/heads/master'
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@master
     with:
-      gh_environment: prod_plan
+      gh_environment: prod
     secrets:
       client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
       client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
