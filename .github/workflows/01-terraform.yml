@@ -9,8 +9,8 @@ jobs:
     with:
       gh_environment: dev
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
+      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
 
   Deploy_Dev:
     needs: Plan_Dev
@@ -18,8 +18,8 @@ jobs:
     with:
       gh_environment: dev
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
+      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
 
   Plan_Prod:
     if: github.ref == 'refs/heads/master'
@@ -27,8 +27,8 @@ jobs:
     with:
       gh_environment: prod
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
+      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
+      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
 
   Deploy_Prod:
     needs: Plan_Prod
@@ -36,5 +36,5 @@ jobs:
     with:
       gh_environment: prod
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
+      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
+      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}

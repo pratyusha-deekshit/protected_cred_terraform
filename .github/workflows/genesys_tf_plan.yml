@@ -14,10 +14,10 @@ on:
         type: string
         default: null
     secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID_val:
+      client_id:
         description: 'cli config credentials ID'
         required: true
-      GENESYSCLOUD_OAUTHCLIENT_SECRET_val:
+      client_secret:
         description: 'cli config credentials Secret'
         required: true
 jobs:
@@ -27,8 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ inputs.gh_environment }}
     env:
-      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_val }}
-      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_val }}
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.client_id }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.client_secret }}
       GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
       GENESYSCLOUD_REGION: "eu-west-2"
       GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
