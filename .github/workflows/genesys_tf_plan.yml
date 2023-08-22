@@ -3,10 +3,6 @@ name: "genesys_tf_plan"
 on:
   workflow_call:
     inputs:
-      path:
-        description: 'Specifies the path of the root terraform module.'
-        required: true
-        type: string
       tf_version:
         description: 'Specifies version of Terraform to use. e.g: 1.1.0 Default=latest.'
         required: false
@@ -17,62 +13,50 @@ on:
         required: false
         type: string
         default: null
-      GENESYSCLOUD_API_REGION:
-        description: 'Specifies the Genesys API region.'
-        required: true
-        type: string
-        default: null
-      GENESYSCLOUD_REGION:
-        description: 'Specifies the Genesys region.'
-        required: true
-        type: string
-        default: null
-      GENESYSCLOUD_ARCHY_REGION:
-        description: 'Specifies the Genesys archy region.'
-        required: true
-        type: string
-        default: null
-    secrets:
-      GENESYSCLOUD_OAUTHCLIENT_ID:
-        description: 'cli config credentials ID'
-        required: true
-      GENESYSCLOUD_OAUTHCLIENT_SECRET:
-        description: 'cli config credentials Secret'
-        required: true
 
 jobs:
-  build-plan:
+  terraformPlan:
+    if: github.ref == 'refs/heads/develop'
+    name: 'Terraform_plan'
     runs-on: ubuntu-latest
     environment: ${{ inputs.gh_environment }}
+    env:
+      GENESYSCLOUD_OAUTHCLIENT_ID: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID }}
+      GENESYSCLOUD_OAUTHCLIENT_SECRET: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
+      GENESYSCLOUD_API_REGION: "https://api.euw2.pure.cloud"
+      GENESYSCLOUD_REGION: "eu-west-2"
+      GENESYSCLOUD_ARCHY_REGION: "euw2.pure.cloud"
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
         shell: bash
-        # working-directory: ${{ inputs.path }}
-        
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3.1.0
-        
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2.0.2
-        with:
-          terraform_version: ${{ inputs.tf_version }}
+    # Checkout the repository to the GitHub Actions runner
+    - name: Checkout
+      uses: actions/checkout@v3
 
-      - name: Terraform Init
-        working-directory: ./blueprint
-        run: |
-            export oauthclient_id=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_ID }}
-            export oauthclient_secret=${{ inputs.GENESYSCLOUD_OAUTHCLIENT_SECRET }}
-            export aws_region=${{ inputs.GENESYSCLOUD_REGION }}
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: ${{ inputs.tf_version }}
 
-            terraform init
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      working-directory: ./genesys_objects
+      run: |
+          export oauthclient_id=$GENESYSCLOUD_OAUTHCLIENT_ID
+          export oauthclient_secret=$GENESYSCLOUD_OAUTHCLIENT_SECRET
+          export aws_region=$GENESYSCLOUD_REGION
 
-      - name: Terraform Plan
-        working-directory: ./blueprint
-        run: terraform plan -input=false
-        continue-on-error: true
+          terraform init
 
-      - name: Terraform Plan Status
-        working-directory: ./blueprint
-        if: steps.plan.outcome == 'failure'
-        run: exit 1
+    # Generates an execution plan for Terraform
+    - name: Terraform Plan
+      working-directory: ./genesys_objects
+      run: terraform plan -input=false
+
+      # On push to "main", build or change infrastructure according to Terraform configuration files
+      # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
