@@ -3,6 +3,14 @@ on:
   workflow_dispatch:
 
 jobs:
+  branch_name:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+    - name: print branch
+      run:  echo ${GITHUB_REF##*/}
   Plan_Dev:
     if: github.ref == 'refs/heads/develop'
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@develop
