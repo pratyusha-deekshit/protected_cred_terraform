@@ -30,7 +30,7 @@ jobs:
       client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
 
   Plan_Prod:
-    if: github.ref == "refs/heads/master"
+    if: github.ref == 'refs/heads/master'
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@master
     with:
       gh_environment: prod
