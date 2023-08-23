@@ -10,7 +10,7 @@ jobs:
         shell: bash
     steps:
     - name: print branch
-      run:  echo ${GITHUB_REF##*/}
+      run:  echo ${{ github.ref }}
   Plan_Dev:
     if: github.ref == 'refs/heads/develop'
     uses: pratyusha-deekshit/protected_cred_terraform/.github/workflows/genesys_tf_plan.yml@develop
