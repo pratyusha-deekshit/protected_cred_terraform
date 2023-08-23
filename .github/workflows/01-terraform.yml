@@ -27,8 +27,8 @@ jobs:
     with:
       gh_environment: prod
     secrets:
-      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
-      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
+      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
 
   Deploy_Prod:
     needs: Plan_Prod
@@ -36,5 +36,5 @@ jobs:
     with:
       gh_environment: prod
     secrets:
-      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_MASTER }}
-      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_MASTER }}
+      client_id: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_ID_TEST }}
+      client_secret: ${{ secrets.GENESYSCLOUD_OAUTHCLIENT_SECRET_TEST }}
